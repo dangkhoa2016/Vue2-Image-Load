@@ -1,0 +1,23 @@
+<div class='container-fluid mt-5'>
+  <b-row class='mb-3'>
+    <b-col cols='4'>
+      <image-info :width='width' :height='height' :size='size'></image-info>
+      <error-load v-if='error' :text='error'></error-load>
+    </b-col>
+    <b-col cols='8' class='text-center'>
+      <div class='d-flex justify-content-center' v-if='loading'>
+        <div class='spinner-border' role='status'>
+          <span class='visually-hidden'>Loading...</span>
+        </div>
+      </div>
+      <img v-else-if='src' :src='src' class='img-fluid wow' ref='img' @load='imageLoaded' @error='loadError' />
+    </b-col>
+  </b-row>
+
+  <b-row>
+    <b-col class='text-center'>
+      <b-input class='mb-2' :disabled='loading' v-model='anotherSrc' @keyup.enter='loadAnother' />
+      <b-button variant='info' :disabled='loading' @click.prevent='loadAnother'>Load image</b-button>
+    </b-col>
+  </b-row>
+</div>
